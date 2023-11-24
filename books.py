@@ -50,13 +50,23 @@ async def read_book_category_by_query(category: str):
   return books_to_return  
  
  
-@app.get("/books/books_author")
+@app.get("/books/byauthor/")    
+async def get_books_by_author(book_author: str):
+   books_to_return = []
+   for book in BOOKS:
+      if book.get('author').casefold() ==  book_author.casefold():
+        books_to_return.append(book)
+   return books_to_return
+ 
+@app.get("/books/books_author/")
 async def read_book_author_category_by_query(author: str, category):
   books_to_return = []
   for book in BOOKS:
    if book.get('category').casefold() == category.casefold() and book.get('author').casefold() == author.casefold():
      books_to_return.append(book) 
-  return books_to_return  
+  return books_to_return      
+
+
  
  
 # POST METHOD
@@ -86,6 +96,7 @@ async def delete_book(book_title: str):
           
      
            
+
           
  
     
